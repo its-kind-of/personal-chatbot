@@ -6,6 +6,10 @@ import torch
 from model import NeuralNet
 from utils import bag_of_words, tokenize
 
+try:
+    from typing import Literal
+except ImportError:
+    from typing_extensions import Literal
 
 st.title("Tensorflow Chatbot")
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
