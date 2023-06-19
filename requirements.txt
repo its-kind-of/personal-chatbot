@@ -2,4 +2,5 @@ numpy
 streamlit-chat
 streamlit
 torch
+nltk
 
