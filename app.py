@@ -1,11 +1,13 @@
+import streamlit as st
+from streamlit_chat import message
 import random
 import json
-
 import torch
-
 from model import NeuralNet
 from utils import bag_of_words, tokenize
 
+
+st.title("Tensorflow Chatbot")
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 with open('intent.json', 'r') as json_data:
@@ -26,14 +28,12 @@ model.load_state_dict(model_state)
 model.eval()
 
 bot_name = "Nick"
-print("Let's chat! (type 'quit' to exit)")
-while True:
-    # sentence = "do you use credit cards?"
-    sentence = input("You: ")
-    if sentence == "quit":
-        break
+st.write("Let's chat! (type 'quit' to exit)")
 
-    sentence = tokenize(sentence)
+    # sentence = "do you use credit cards?"
+if __name__ == "__main__":
+    user_query = st.text_input(label="Write the query")
+    sentence = tokenize(user_query)
     X = bag_of_words(sentence, all_words)
     X = X.reshape(1, X.shape[0])
     X = torch.from_numpy(X).to(device)
@@ -48,6 +48,7 @@ while True:
     if prob.item() > 0.75:
         for intent in intents['intents']:
             if tag == intent["tag"]:
-                print(f"{bot_name}: {random.choice(intent['responses'])}")
+                st.write(f"{bot_name}: {random.choice(intent['responses'])}")
+
     else:
-        print(f"{bot_name}: I do not understand...")
+	    st.write(f"{bot_name}: I do not understand...")
