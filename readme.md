@@ -30,3 +30,4 @@ This file trains the chatbot model using the intents data from the `intent.json`
 This file implements a Streamlit web application for interacting with the chatbot. It loads the trained model from the `data.pth` file and allows users to input queries. The chatbot responds with appropriate messages based on the trained model's predictions.
 
 Please refer to each file for more details on their implementations.
+you can check the app on this website _https://nikhil-chatbot.onrender.com/_
